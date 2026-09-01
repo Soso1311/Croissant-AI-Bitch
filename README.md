@@ -167,22 +167,3 @@ No permission is granted to copy, modify, distribute, commercially use, sublicen
 # Built on Apple Silicon 
 
 Made with Python, MLX, open-source AI models, and way too much terminal fuckery.
-
-
-
-
-
-
-
-
-
-
-
-
-```bash
-cat > .gitignore << 'EOF'
-__pycache__/
-*.pyc
-.DS_Store
-.env
-/tmp/
