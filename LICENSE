@@ -1,30 +1,309 @@
-Croissant — All Rights Reserved
+CROISSANT PROPRIETARY SOFTWARE LICENSE
+Version 1.0 — September 2026
 
-Copyright © 2026 Soham Vishal Seth. All Rights Reserved.
+Copyright © 2026 Soham Vishal Seth
+All Rights Reserved.
 
-This repository and all of its contents, including but not limited to source code, software, documentation, assets, prompts, models/configurations, and associated materials, are proprietary.
+======================================================================
+                         CROISSANT
+                    PROPRIETARY LICENSE
+======================================================================
 
-No permission is granted to any person or entity to:
+IMPORTANT: READ THIS LICENSE CAREFULLY BEFORE USING, COPYING,
+MODIFYING, OR DISTRIBUTING THIS SOFTWARE.
 
-- Copy, reproduce, or redistribute this software.
-- Modify, adapt, or create derivative works from this software.
-- Use this software or any portion of it for personal or commercial purposes.
-- Sell, sublicense, lease, or otherwise distribute this software.
-- Incorporate any portion of this software into another project.
-- Publish modified or unmodified versions of this software.
-- Use this software as the basis for a competing product or service.
-- Use the source code, architecture, prompts, or implementation for the development of another AI assistant or similar system.
+This software, including its source code, object code, architecture,
+documentation, prompts, configurations, assets, interfaces, and
+associated materials (collectively, the "Software"), is proprietary
+and confidential property of Soham Vishal Seth ("Copyright Owner").
 
-Viewing the repository on GitHub does not grant any license or rights to use the software.
+NO RIGHTS ARE GRANTED EXCEPT THOSE EXPRESSLY PROVIDED IN THIS LICENSE.
 
-You may view the source code for informational and educational purposes only.
+----------------------------------------------------------------------
+1. OWNERSHIP
+----------------------------------------------------------------------
 
-Any use beyond viewing requires explicit written permission from the copyright holder.
+The Software and all intellectual property rights in the Software are
+and remain the exclusive property of Soham Vishal Seth, except for
+third-party components which remain subject to their respective
+licenses.
 
-For permission requests, contact the repository owner through the contact information associated with this GitHub repository.
+Nothing in this License transfers ownership of the Software or any
+intellectual property rights to any person or entity.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, TO THE MAXIMUM EXTENT PERMITTED BY LAW.
+The name "Croissant", its branding, logos, trademarks, service marks,
+and associated identity are not licensed under this agreement.
 
-All rights not expressly granted are reserved.
+----------------------------------------------------------------------
+2. NO LICENSE GRANTED BY DEFAULT
+----------------------------------------------------------------------
 
-Copyright © 2026 Soham Vishal Seth. All Rights Reserved.
+Except where expressly authorised in writing by the Copyright Owner,
+you are NOT granted permission to:
+
+(a) copy the Software;
+
+(b) reproduce the Software in whole or in part;
+
+(c) modify, adapt, translate, or create derivative works from the
+    Software;
+
+(d) distribute, publish, upload, mirror, sublicense, sell, rent,
+    lease, or otherwise provide the Software to any third party;
+
+(e) use the Software or any substantial portion of it for commercial
+    purposes;
+
+(f) incorporate the Software or any substantial portion of it into
+    another product, service, application, system, or commercial
+    offering;
+
+(g) use the Software to create a competing product or service;
+
+(h) reverse engineer, decompile, disassemble, or otherwise attempt to
+    derive source code from compiled portions of the Software, except
+    where such restriction is prohibited by applicable law;
+
+(i) remove, alter, or obscure copyright, trademark, attribution,
+    confidentiality, or proprietary notices;
+
+(j) use the Software, its source code, architecture, documentation,
+    prompts, or confidential technical information to develop,
+    train, improve, or assist another commercial product or service;
+
+(k) make the Software available through a public repository, package
+    registry, file-sharing service, torrent, mirror, or similar
+    distribution mechanism;
+
+(l) permit another person or entity to exercise any of the rights
+    prohibited by this License.
+
+----------------------------------------------------------------------
+3. PERSONAL EVALUATION
+----------------------------------------------------------------------
+
+No right to use the Software is granted merely because the Software
+is publicly accessible, visible on a repository, downloadable, or
+otherwise obtainable.
+
+Any access granted by the Copyright Owner for evaluation, testing,
+demonstration, research, development, or review purposes is limited
+to the specific purpose expressly authorised by the Copyright Owner.
+
+Such access does not constitute a transfer of ownership or a general
+license to use the Software.
+
+----------------------------------------------------------------------
+4. COMMERCIAL USE
+----------------------------------------------------------------------
+
+Commercial use of the Software is strictly prohibited without a
+separate written commercial license signed by the Copyright Owner.
+
+Commercial use includes, without limitation:
+
+(a) selling the Software or a derivative work;
+
+(b) incorporating the Software into a paid product or service;
+
+(c) using the Software to provide paid services;
+
+(d) monetising a product substantially derived from the Software;
+
+(e) using the Software internally for a commercial business;
+
+(f) using the Software to develop or operate a competing commercial
+    product or service.
+
+Any commercial license must be separately agreed in writing.
+
+----------------------------------------------------------------------
+5. DERIVATIVE WORKS
+----------------------------------------------------------------------
+
+No permission is granted to create derivative works of the Software.
+
+A derivative work includes any modified, translated, adapted,
+restructured, extended, or substantially transformed version of the
+Software or any substantial portion thereof.
+
+Creating a new implementation independently, without copying
+protected expression, is not automatically prohibited by this License.
+
+----------------------------------------------------------------------
+6. CONFIDENTIAL INFORMATION
+----------------------------------------------------------------------
+
+Any non-public information relating to Croissant, including but not
+limited to unpublished source code, architecture, algorithms,
+technical designs, prompts, system instructions, credentials,
+business strategies, product roadmaps, unreleased features, research,
+datasets, and development plans, shall be treated as confidential
+information where the circumstances indicate that such information is
+confidential.
+
+You must not disclose or use such confidential information except as
+expressly authorised in writing by the Copyright Owner.
+
+This clause does not restrict information that:
+
+(a) becomes publicly available through no breach of this License;
+
+(b) was lawfully known to you before disclosure;
+
+(c) is independently developed without use of the confidential
+    information; or
+
+(d) must be disclosed by law.
+
+----------------------------------------------------------------------
+7. NO TRANSFER OF INTELLECTUAL PROPERTY
+----------------------------------------------------------------------
+
+Nothing in this License constitutes:
+
+(a) an assignment of copyright;
+
+(b) an assignment of patent rights;
+
+(c) a transfer of trade secrets;
+
+(d) a transfer of trademarks;
+
+(e) a transfer of design rights; or
+
+(f) any other transfer of intellectual property rights.
+
+All rights not expressly granted remain reserved by the Copyright
+Owner.
+
+----------------------------------------------------------------------
+8. THIRD-PARTY SOFTWARE
+----------------------------------------------------------------------
+
+The Software may contain, depend upon, or interact with third-party
+software, libraries, models, APIs, datasets, or other materials.
+
+Such components are not necessarily owned by the Copyright Owner and
+may be governed by separate licenses.
+
+You are responsible for complying with applicable third-party
+licenses.
+
+Nothing in this License is intended to override rights that you may
+have under a valid third-party license.
+
+----------------------------------------------------------------------
+9. TERMINATION
+----------------------------------------------------------------------
+
+Any permission granted under this License terminates automatically
+upon your breach of its terms.
+
+Upon termination, you must immediately:
+
+(a) stop using the Software;
+
+(b) stop distributing the Software;
+
+(c) delete copies of the Software in your possession or control,
+    except where retention is required by law; and
+
+(d) cease exercising any rights granted under this License.
+
+Termination does not limit any other rights or remedies available to
+the Copyright Owner.
+
+----------------------------------------------------------------------
+10. ENFORCEMENT
+----------------------------------------------------------------------
+
+Nothing in this License limits the Copyright Owner's right to pursue
+any remedies available under applicable law in response to
+unauthorised use, copying, distribution, commercial exploitation,
+misappropriation of confidential information, or other infringement.
+
+Where legally available, the Copyright Owner may seek appropriate
+relief, which may include injunctive relief, damages, an account of
+profits, costs, or other remedies available under applicable law.
+
+The Copyright Owner does not guarantee that any particular remedy
+will be available in every jurisdiction or circumstance.
+
+----------------------------------------------------------------------
+11. NO WARRANTY
+----------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS" TO THE MAXIMUM EXTENT PERMITTED BY
+LAW.
+
+NO WARRANTY IS GIVEN REGARDING THE SOFTWARE'S ACCURACY, RELIABILITY,
+SECURITY, PERFORMANCE, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, OR NON-INFRINGEMENT.
+
+----------------------------------------------------------------------
+12. LIMITATION OF LIABILITY
+----------------------------------------------------------------------
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COPYRIGHT OWNER SHALL
+NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+OR EXEMPLARY DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE
+SOFTWARE.
+
+NOTHING IN THIS LICENSE EXCLUDES OR LIMITS LIABILITY WHERE SUCH
+EXCLUSION OR LIMITATION IS PROHIBITED BY LAW.
+
+----------------------------------------------------------------------
+13. RESERVATION OF RIGHTS
+----------------------------------------------------------------------
+
+All rights not expressly granted under this License are reserved.
+
+In particular, the Copyright Owner reserves all rights concerning:
+
+- reproduction;
+- distribution;
+- adaptation;
+- commercial exploitation;
+- licensing;
+- sublicensing;
+- publication;
+- modification;
+- creation of derivative works;
+- commercial partnerships; and
+- future versions of Croissant.
+
+----------------------------------------------------------------------
+14. WRITTEN PERMISSION
+----------------------------------------------------------------------
+
+Any permission to use the Software outside the rights expressly
+granted by this License must be provided in a written agreement
+authorised by the Copyright Owner.
+
+Verbal permission is insufficient unless legally binding under
+applicable law.
+
+----------------------------------------------------------------------
+15. GOVERNING LAW
+----------------------------------------------------------------------
+
+This License shall be governed by and interpreted in accordance with
+the laws of England and Wales, subject to any mandatory rights or
+protections that cannot lawfully be excluded.
+
+----------------------------------------------------------------------
+16. COPYRIGHT NOTICE
+----------------------------------------------------------------------
+
+Copyright © 2026 Soham Vishal Seth
+All Rights Reserved.
+
+Croissant is proprietary software.
+
+Unauthorised copying, modification, distribution, commercial use,
+or exploitation of this Software is prohibited.
+
+======================================================================
+                         END OF LICENSE
+======================================================================
