@@ -134,7 +134,7 @@ def search_news(query: str, limit: int = 5) -> list:
 
     soup = BeautifulSoup(
         response.content,
-        "xml"
+        "html.parser"
     )
 
     items = soup.find_all("item")
@@ -184,10 +184,9 @@ def search_news(query: str, limit: int = 5) -> list:
 
 def research_web(query: str) -> str:
     """
-    Perform multi-source web research.
-
-    Returns structured research that can be given
-    to the local JARVIS reasoning model.
+    Perform multi-source web research: find sources via news RSS, then
+    fetch each source's actual page and extract readable text — not just
+    the RSS summary — so the reasoning model gets real evidence.
     """
 
     try:
@@ -196,7 +195,7 @@ def research_web(query: str) -> str:
 
         results = search_news(
             query,
-            limit=6
+            limit=4
         )
 
         if not results:
@@ -214,25 +213,30 @@ def research_web(query: str) -> str:
 
         for i, result in enumerate(results, 1):
 
-            output.append(
-                f"SOURCE {i}"
-            )
+            output.append(f"SOURCE {i}")
+            output.append(f"TITLE: {result['title']}")
+            output.append(f"URL: {result['url']}")
 
-            output.append(
-                f"TITLE: {result['title']}"
-            )
+            page_text = fetch_webpage(result['url'])
 
-            output.append(
-                f"URL: {result['url']}"
-            )
+            # fetch_webpage returns an error string starting with "Couldn't"
+            # on failure — fall back to the RSS summary rather than feeding
+            # the model an error message as if it were content.
+            if page_text and not page_text.startswith("Couldn't"):
+                output.append(f"CONTENT: {page_text[:2500]}")
+            else:
+                output.append(
+                    f"CONTENT: (full page unavailable — RSS summary only: "
+                    f"{result['summary']})"
+                )
 
-            output.append(
-                f"SUMMARY: {result['summary']}"
-            )
+            output.append("-" * 60)
 
-            output.append(
-                "-" * 60
-            )
+        output.append(
+            "\nBase your answer only on the CONTENT above. If it doesn't "
+            "cover something, say so rather than filling the gap from "
+            "prior knowledge."
+        )
 
         return "\n".join(output)[:18000]
 
