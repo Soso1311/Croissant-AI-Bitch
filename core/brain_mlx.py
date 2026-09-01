@@ -28,6 +28,8 @@ open_website(url)
 open_url_in_safari(url)
 search_web(query)
 system_status()
+remember(key, value)
+recall(key)
 
 TOOL FORMAT:
 
@@ -47,6 +49,12 @@ ARGS: {"query": "latest Apple news"}
 TOOL: system_status
 ARGS: {}
 
+TOOL: remember
+ARGS: {"key": "user_name", "value": "Soso"}
+
+TOOL: recall
+ARGS: {"key": "user_name"}
+
 RULES:
 
 - Never invent tools.
@@ -61,7 +69,10 @@ RULES:
 - "Search for X" means search_web.
 - "Check my system" means system_status.
 - "Research X" means research_web.
-- Use research_web when the user asks for current information, comparisons, recommendations, financial research, news, or factual research that requires the web
+- Use research_web when the user asks for current information, comparisons, recommendations, financial research, news, or factual research that requires the web.
+- If a task involves comparing multiple subjects, call research_web separately once per subject — don't try to research all of them in one call.
+- If the user asks you to remember something about them, choose a short descriptive key yourself and call remember. If they ask what you know / recall something, call recall with your best-guess key, or a few guesses in sequence if the first misses.
+- When you have research results in front of you (a TOOL RESULT block), treat them as the evidence. Do not state something as fact if the evidence doesn't support it — say what the evidence shows, and say plainly if it's inconclusive or sources conflict. Never fill a gap with your own prior knowledge and present it as established.
 """
 
 conversation = []
