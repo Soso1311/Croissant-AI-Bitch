@@ -7,9 +7,9 @@ def main():
 
     print("""
 ╔════════════════════════════════════╗
-║            J A R V I S             ║
-║          SYSTEM ONLINE              ║
-║          VOICE MODE                 ║
+║            C W A S O               ║
+║          SYSTEM ONLINE             ║
+║            VOICE MODE              ║
 ╚════════════════════════════════════╝
 """)
 
