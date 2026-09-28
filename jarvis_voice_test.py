@@ -8,12 +8,12 @@ voice = PiperVoice.load(str(MODEL))
 
 text = "Good evening, sir. How may I be of assistance?"
 
-print("JARVIS is speaking...")
+print("Croissant is speaking...")
 
 with wave.open("jarvis_test.wav", "wb") as wav:
     voice.synthesize_wav(text, wav)
 
-print("Done. Playing JARVIS...")
+print("Done. Playing Croissant...")
 
 import subprocess
 subprocess.run(["afplay", "jarvis_test.wav"])
