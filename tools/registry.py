@@ -49,8 +49,7 @@ def python_repl(code: str) -> str:
     }
 )
 def run_terminal(command: str) -> str:
-
-  for blocked in config.BLOCKED_COMMANDS:
+    for blocked in config.BLOCKED_COMMANDS:
         if blocked in command:
             return f"SECURITY REFUSAL: Command contains blocked dangerous syntax: '{blocked}'."
     try:
