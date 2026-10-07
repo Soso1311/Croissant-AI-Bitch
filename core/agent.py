@@ -1,127 +1,81 @@
-from core.brain_mlx import ask_jarvis, parse_tool_call
+import json
+from typing import List, Dict, Any
+from openai import OpenAI
+import config
+from memory.store import MemoryStore
+from core.planner import ExecutionPlan
+from tools.registry import TOOLS_REGISTRY, TOOL_SCHEMAS
 
-from memory.store import remember, recall
+class AutonomousAgent:
+    """ReAct execution core with dynamic security filtering and self-repair logic."""
 
-from tools.apps import (
-    open_app,
-    close_app,
-    list_open_apps,
-)
+    def __init__(self):
+        self.client = OpenAI(base_url=config.OLLAMA_BASE_URL, api_key="ollama")
+        self.memory = MemoryStore()
 
-from tools.web import (
-    open_website,
-    open_url_in_safari,
-    search_web,
-    research_web,
-)
+    def run(self, goal: str, max_steps: int = 12) -> str:
+        plan = ExecutionPlan(goal=goal)
+        memories = self.memory.recall(goal, n_results=2)
+        mem_context = "\n".join([f"- {m}" for m in memories]) if memories else "None"
 
-from tools.system import system_status
-
-
-MAX_TOOL_ITERATIONS = 5
-
-
-def _memory_remember(key: str, value: str) -> str:
-    remember(key, value)
-    return f"Remembered {key}: {value}"
-
-
-def _memory_recall(key: str) -> str:
-    value = recall(key)
-    if value is None:
-        return f"No stored value for '{key}'."
-    return f"{key}: {value}"
-
-
-TOOLS = {
-    "open_app": open_app,
-    "close_app": close_app,
-    "list_open_apps": list_open_apps,
-    "open_website": open_website,
-    "open_url_in_safari": open_url_in_safari,
-    "search_web": search_web,
-    "research_web": research_web,
-    "system_status": system_status,
-    "remember": _memory_remember,
-    "recall": _memory_recall,
-}
-
-
-# ============================================================
-# STATUS
-# ============================================================
-
-def _status(callback, message):
-    print(message)
-
-    if callback:
-        try:
-            callback(message)
-        except Exception:
-            pass
-
-
-# ============================================================
-# MAIN AGENT
-# ============================================================
-#
-# understand -> decide if a tool is needed -> execute -> observe ->
-# reason -> (repeat if needed) -> answer.
-#
-# No keyword/phrase routing here on purpose. core/brain_mlx.py's system
-# prompt already tells the model what tools exist and when to use them —
-# this loop just executes whatever the model decides and feeds the result
-# back for another round, up to MAX_TOOL_ITERATIONS.
-
-def run_agent(command: str, status_callback=None) -> str:
-
-    current_input = command
-
-    for _ in range(MAX_TOOL_ITERATIONS):
-
-        response = ask_jarvis(current_input)
-        call = parse_tool_call(response)
-
-        if call is None:
-            return response
-
-        name = call["name"]
-        args = call["args"]
-
-        tool = TOOLS.get(name)
-
-        if tool is None:
-            return f"I tried to use a tool called '{name}', but I don't have that, sir."
-
-        subject = (
-            args.get("query")
-            or args.get("app_name")
-            or args.get("url")
-            or args.get("key")
-            or ""
+        system_prompt = (
+            f"You are Jarvis, an autonomous local AI agent operating within a secure sandbox environment.\n"
+            f"Workspace Path: {config.WORKSPACE_DIR}\n\n"
+            f"Relevant Memory:\n{mem_context}\n\n"
+            f"Rules:\n"
+            f"1. Break down complex tasks into subtasks.\n"
+            f"2. Use available tools to solve problems step-by-step.\n"
+            f"3. When a security refusal or error occurs, adjust your approach and continue.\n"
+            f"4. Output your final response clearly once the goal is complete."
         )
 
-        _status(
-            status_callback,
-            f"⚙️ JARVIS: Using {name}" + (f" — {subject}..." if subject else "...")
-        )
+        messages: List[Dict[str, Any]] = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Task: {goal}"}
+        ]
 
-        try:
-            result = tool(**args)
-        except Exception as e:
-            result = f"Tool '{name}' failed: {e}"
+        for step in range(1, max_steps + 1):
+            print(f"\n🧠 [Step {step}/{max_steps}] Reasoning...")
 
-        _status(status_callback, f"✓ JARVIS: Done with {name}.")
+            try:
+                response = self.client.chat.completions.create(
+                    model=config.MODEL_NAME,
+                    messages=messages,
+                    tools=TOOL_SCHEMAS,
+                    tool_choice="auto",
+                    temperature=0.2
+                )
+            except Exception as e:
+                return f"Inference engine error: {str(e)}"
 
-        current_input = (
-            f"TOOL RESULT ({name}):\n{result}\n\n"
-            f'Using this result, answer the user\'s original request: "{command}"\n'
-            "If this fully answers it, give your final answer now in plain "
-            "text (no TOOL: line). If you still need another tool "
-            "(e.g. a second subject to research), call it."
-        )
+            msg = response.choices[0].message
+            messages.append(msg)
 
-    return (
-        "I've gathered what I can, sir, but I want to stop here rather "
-        "than keep going in circles."
-    )
+            if msg.tool_calls:
+                for call in msg.tool_calls:
+                    fn_name = call.function.name
+                    try:
+                        args = json.loads(call.function.arguments)
+                    except Exception:
+                        args = {}
+
+                    print(f"🔧 Tool: {fn_name}({args})")
+
+                    if fn_name in TOOLS_REGISTRY:
+                        obs = TOOLS_REGISTRY[fn_name](**args)
+                    else:
+                        obs = f"Error: Tool '{fn_name}' not found."
+
+                    print(f"👁️ Result: {str(obs)[:200]}...")
+
+                    messages.append({
+                        "role": "tool",
+                        "tool_call_id": call.id,
+                        "content": str(obs)
+                    })
+            else:
+                final_res = msg.content or "Task completed."
+                self.memory.save(f"Goal: {goal} | Result: {final_res[:200]}")
+                return final_res
+
+        return "Max execution steps reached."
