@@ -1,50 +1,39 @@
-from core.listener import wait_for_wake_word, record_until_silence
-from core.agent import run_agent
-from core.voice import speak
-
+import argparse
+import sys
+from core.agent import AutonomousAgent
 
 def main():
+    parser = argparse.ArgumentParser(description="Croissant-AI-Bitch: Secure Autonomous Agent")
+    parser.add_argument("--goal", type=str, help="Run a specific autonomous goal directly.")
+    args = parser.parse_args()
 
-    print("""
-╔════════════════════════════════════╗
-║            C W A S O               ║
-║          SYSTEM ONLINE             ║
-║            VOICE MODE              ║
-╚════════════════════════════════════╝
-""")
+    agent = AutonomousAgent()
+
+    print("==================================================")
+    print("🤖 CROISSANT JARVIS AUTONOMOUS AGENT ONLINE")
+    print("Security: Sandboxed Workspace + Interceptor Enabled")
+    print("==================================================")
+
+    if args.goal:
+        result = agent.run(args.goal)
+        print(f"\n✅ Result:\n{result}")
+        return
 
     while True:
-
         try:
-
-            wait_for_wake_word()
-
-            command = record_until_silence()
-
-            if not command:
-                print("No command detected.")
+            user_input = input("\nJarvis > ").strip()
+            if user_input.lower() in ["exit", "quit", "q"]:
+                print("Shutting down Jarvis.")
+                break
+            if not user_input:
                 continue
 
-            print(f"⚡ Processing: {command}")
-
-            response = run_agent(
-                command,
-                status_callback=speak
-            )
-
-            print(f"🤖 JARVIS: {response}")
-
-            speak(response)
+            result = agent.run(user_input)
+            print(f"\n✅ Result:\n{result}")
 
         except KeyboardInterrupt:
-
-            print("\nJARVIS shutting down.")
-            break
-
-        except Exception as e:
-
-            print(f"❌ Error: {e}")
-
+            print("\nSession interrupted.")
+            sys.exit(0)
 
 if __name__ == "__main__":
     main()
