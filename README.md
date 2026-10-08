@@ -6,6 +6,8 @@ Croissant will be your personal AI assistant that is able to run locally on Appl
 
 The actual goal of the project is to build a Claude-style localised brain system with autonomous agent capabilities, rather than a collection of hardcoded voice commands to aid you.
 
+In the terminal, the active agent operates under the name **Jay**.
+
 # Features
 
 # Local AI Brain
@@ -27,7 +29,7 @@ Research results are passed back to the local model for analysis rather than sim
 
 # macOS Control
 
-Ho can interact with the desktop through tools such as:
+Jay can interact with the desktop through tools such as:
 
 * Open applications
 * Close applications
@@ -43,12 +45,12 @@ The project includes a memory system for storing and retrieving information abou
 # Architecture
 
                  ┌─────────────────┐
-                 │    Microphone   │
+                 │   Microphone    │
                  └────────┬────────┘
                           │
                           ▼
                  ┌─────────────────┐
-                 │  Wake Word      │
+                 │    Wake Word    │
                  │  openWakeWord   │
                  └────────┬────────┘
                           │
@@ -60,7 +62,7 @@ The project includes a memory system for storing and retrieving information abou
                           │
                           ▼
                  ┌─────────────────┐
-                 │   JARVIS Agent  │
+                 │    Jay Agent    │
                  │                 │
                  │ Local AI Brain  │
                  │ Memory          │
@@ -68,26 +70,26 @@ The project includes a memory system for storing and retrieving information abou
                  │ Reasoning       │
                  └───────┬─────────┘
                          │
-            ┌────────────┼─────────────┐
-            │            │             │
-            ▼            ▼             ▼
-       ┌────────┐   ┌──────────┐   ┌─────────┐
-       │ Memory │   │ Web Tools│   │ macOS   │
-       │        │   │          │   │ Tools   │
-       └────────┘   └──────────┘   └─────────┘
+        ┌────────────────┼────────────────┐
+        │                │                │
+        ▼                ▼                ▼
+   ┌────────┐      ┌──────────┐      ┌─────────┐
+   │ Memory │      │ Web Tools│      │ macOS   │
+   │        │      │          │      │ Tools   │
+   └────────┘      └──────────┘      └─────────┘
                          │
                          ▼
                  ┌─────────────────┐
-                 │    Reasoning     │
-                 │    / Response    │
+                 │    Reasoning    │
+                 │    / Response   │
                  └────────┬────────┘
                           │
                           ▼
                  ┌─────────────────┐
-                 │      TTS        │
-                 │  JARVIS Voice   │
+                 │       TTS       │
+                 │    Jay Voice    │
                  └─────────────────┘
-                 
+
 # Current Stack
 
 | Component          | Technology              |
@@ -100,7 +102,7 @@ The project includes a memory system for storing and retrieving information abou
 | Audio              | sounddevice             |
 | Web requests       | Requests                |
 | Web parsing        | BeautifulSoup           |
-| TTS                | ONNX-based JARVIS voice |
+| TTS                | ONNX-based Jay voice    |
 | Platform           | macOS / Apple Silicon   |
 
 # Development Reason
@@ -138,32 +140,3 @@ Future versions will aim to keep as much personal data, conversation history, an
 Croissant is an active development project.
 
 The core voice pipeline is functional:
-
-```
-Wake Word
-   ↓
-Speech Recognition
-   ↓
-Local AI
-   ↓
-Tool / Research
-   ↓
-Reasoning
-   ↓
-Voice Response
-```
-
-The biggest current development focus is transforming the system from a **basic voice assistant into a genuinely capable autonomous AI agent**.
-
-# License
-
-All Rights Reserved.
-
-This repository is publicly viewable for informational and educational purposes only.
-
-No permission is granted to copy, modify, distribute, commercially use, sublicense, reproduce, or create derivative works from this project without explicit written permission from the copyright holder.
----
-
-# Built on Apple Silicon 
-
-Made with Python, MLX, open-source AI models, and way too much terminal fuckery.
