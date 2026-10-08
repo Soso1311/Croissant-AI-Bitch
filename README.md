@@ -25,7 +25,7 @@ In the terminal, the active agent operates under the name **Jay**.
 # Web Research
 
 Croissant can research topics on the web and reason over the gathered information.
-Research results are passed back to the local model for analysis rather than simply being returned raw.
+Research results are passed back to the local model for analysis rather than being returned raw.
 
 # macOS Control
 
@@ -40,55 +40,7 @@ Jay can interact with the desktop through tools such as:
 
 # Memory
 
-The project includes a memory system for storing and retrieving information about the user, and it can retrieve the stored information.
-
-# Architecture
-
-                 ┌─────────────────┐
-                 │   Microphone    │
-                 └────────┬────────┘
-                          │
-                          ▼
-                 ┌─────────────────┐
-                 │    Wake Word    │
-                 │  openWakeWord   │
-                 └────────┬────────┘
-                          │
-                          ▼
-                 ┌─────────────────┐
-                 │ Speech-to-Text  │
-                 │ Faster Whisper  │
-                 └────────┬────────┘
-                          │
-                          ▼
-                 ┌─────────────────┐
-                 │    Jay Agent    │
-                 │                 │
-                 │ Local AI Brain  │
-                 │ Memory          │
-                 │ Tool Selection  │
-                 │ Reasoning       │
-                 └───────┬─────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-        ▼                ▼                ▼
-   ┌────────┐      ┌──────────┐      ┌─────────┐
-   │ Memory │      │ Web Tools│      │ macOS   │
-   │        │      │          │      │ Tools   │
-   └────────┘      └──────────┘      └─────────┘
-                         │
-                         ▼
-                 ┌─────────────────┐
-                 │    Reasoning    │
-                 │    / Response   │
-                 └────────┬────────┘
-                          │
-                          ▼
-                 ┌─────────────────┐
-                 │       TTS       │
-                 │    Jay Voice    │
-                 └─────────────────┘
+The project includes a memory system to store and retrieve user information.
 
 # Current Stack
 
