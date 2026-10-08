@@ -2,7 +2,7 @@ import json
 import os
 import subprocess
 from typing import Callable, Dict, Any, List
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 import config
 from core.repl_sandbox import SecureREPL
 
@@ -20,7 +20,6 @@ def register_tool(name: str, description: str, parameters: dict):
     return decorator
 
 def is_path_safe(filepath: str) -> bool:
-    """Ensures file paths stay within the designated workspace directory."""
     if not config.STRICT_SANDBOX_MODE:
         return True
     abs_target = os.path.realpath(filepath)
@@ -99,7 +98,7 @@ def write_file(filepath: str, content: str) -> str:
 
 @register_tool(
     name="web_search",
-    description="Performs live search query on DuckDuckGo.",
+    description="Performs live search query on DuckDuckGo and returns article title, body, and URL snippets.",
     parameters={
         "type": "object",
         "properties": {"query": {"type": "string"}},
@@ -109,7 +108,15 @@ def write_file(filepath: str, content: str) -> str:
 def web_search(query: str) -> str:
     try:
         with DDGS() as ddgs:
-            results = list(ddgs.text(query, max_results=4))
-            return json.dumps(results) if results else "No results found."
+            results = list(ddgs.text(query, max_results=5))
+            if not results:
+                return "No results found."
+            snippets = []
+            for r in results:
+                title = r.get("title", "No Title")
+                body = r.get("body", "No description")
+                url = r.get("href", "")
+                snippets.append(f"Title: {title}\nSnippet: {body}\nURL: {url}")
+            return "\n---\n".join(snippets)
     except Exception as e:
         return f"Search error: {str(e)}"
